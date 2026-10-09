@@ -2,7 +2,6 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { ChevronRight, Search } from "lucide-react";
 import { useMemo } from "react";
 import { PathCard } from "@/components/path-card";
-import { DoorWheel } from "@/components/door-wheel";
 import { StreamFit } from "@/components/stream-fit";
 import { careerLanes, careers } from "@/data/catalog";
 import {
@@ -46,7 +45,7 @@ const searchModes: { id: SearchBy; label: string; hint: string; placeholder: str
   { id: "exam", label: "Exam", hint: "Tap an exam. Only the courses that exam opens will show under this box.", placeholder: "Search UCEED, CUET, CLAT, CAT" },
   { id: "college", label: "College", hint: "Tap a college. You will see what a student can study there.", placeholder: "Search Sukhdev, NMIMS, ISB, NID" },
   { id: "course", label: "Course", hint: "Type the course. Try CA, BBA, hotel, or design.", placeholder: "Search BMS, B.Com, hotel, law" },
-  { id: "interest", label: "Likes", hint: "Tap what the child likes. Accounts, design, medicine.", placeholder: "Search accounts, law, design" },
+  { id: "interest", label: "Interest", hint: "Tap what the child is interested in. Accounts, design, medicine.", placeholder: "Search accounts, law, design" },
   { id: "become", label: "Become", hint: "Tap the life they want. Doctor, pilot, designer. Each one opens the real path.", placeholder: "Search pilot, actuary, journalist, jewellery" },
 ];
 
@@ -362,7 +361,6 @@ function Home() {
             ))}
           </div>
         </div>
-        <DoorWheel stream={stream} />
       </section>
 
       <section id="find" className="panel mt-4 p-4">
@@ -548,7 +546,7 @@ function Home() {
           )}
         </>
       ) : (
-        <p className="mt-3 text-sm leading-normal text-muted">Tap one name above. The courses open here. Every course in this stream is in the menu.</p>
+        <p className="mt-3 text-sm leading-normal text-muted">Tap one name above. The courses open here. Every course, from every stream, is on the Courses tab.</p>
       )}
       </section>
 

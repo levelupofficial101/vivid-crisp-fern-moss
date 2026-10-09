@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CompareRouteImport } from './routes/compare'
+import { Route as CoursesRouteImport } from './routes/courses'
 import { Route as FitRouteImport } from './routes/fit'
 import { Route as SavedRouteImport } from './routes/saved'
 import { Route as PathSlugRouteImport } from './routes/path.$slug'
@@ -23,6 +24,11 @@ const IndexRoute = IndexRouteImport.update({
 const CompareRoute = CompareRouteImport.update({
   id: '/compare',
   path: '/compare',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CoursesRoute = CoursesRouteImport.update({
+  id: '/courses',
+  path: '/courses',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FitRoute = FitRouteImport.update({
@@ -44,6 +50,7 @@ const PathSlugRoute = PathSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/compare': typeof CompareRoute
+  '/courses': typeof CoursesRoute
   '/fit': typeof FitRoute
   '/saved': typeof SavedRoute
   '/path/$slug': typeof PathSlugRoute
@@ -51,6 +58,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/compare': typeof CompareRoute
+  '/courses': typeof CoursesRoute
   '/fit': typeof FitRoute
   '/saved': typeof SavedRoute
   '/path/$slug': typeof PathSlugRoute
@@ -59,21 +67,30 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/compare': typeof CompareRoute
+  '/courses': typeof CoursesRoute
   '/fit': typeof FitRoute
   '/saved': typeof SavedRoute
   '/path/$slug': typeof PathSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/compare' | '/fit' | '/saved' | '/path/$slug'
+  fullPaths: '/' | '/compare' | '/courses' | '/fit' | '/saved' | '/path/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/compare' | '/fit' | '/saved' | '/path/$slug'
-  id: '__root__' | '/' | '/compare' | '/fit' | '/saved' | '/path/$slug'
+  to: '/' | '/compare' | '/courses' | '/fit' | '/saved' | '/path/$slug'
+  id:
+    | '__root__'
+    | '/'
+    | '/compare'
+    | '/courses'
+    | '/fit'
+    | '/saved'
+    | '/path/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CompareRoute: typeof CompareRoute
+  CoursesRoute: typeof CoursesRoute
   FitRoute: typeof FitRoute
   SavedRoute: typeof SavedRoute
   PathSlugRoute: typeof PathSlugRoute
@@ -93,6 +110,13 @@ declare module '@tanstack/react-router' {
       path: '/compare'
       fullPath: '/compare'
       preLoaderRoute: typeof CompareRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/courses': {
+      id: '/courses'
+      path: '/courses'
+      fullPath: '/courses'
+      preLoaderRoute: typeof CoursesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/fit': {
@@ -122,6 +146,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CompareRoute: CompareRoute,
+  CoursesRoute: CoursesRoute,
   FitRoute: FitRoute,
   SavedRoute: SavedRoute,
   PathSlugRoute: PathSlugRoute,

@@ -1,5 +1,5 @@
 import { Link, useNavigate, useRouter, useRouterState, useCanGoBack } from "@tanstack/react-router";
-import { Bookmark, ChevronLeft, GitCompare, House, ListChecks, Menu, Moon, Sun, X } from "lucide-react";
+import { Bookmark, ChevronLeft, GitCompare, House, Library, ListChecks, Menu, Moon, Sun, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { streamChoices } from "@/data/streams";
 import { useDesk } from "@/lib/desk";
@@ -7,6 +7,7 @@ import { plainOf } from "@/data/simple";
 
 const tabs = [
   { to: "/", label: "Home", icon: House, exact: true },
+  { to: "/courses", label: "Courses", icon: Library, exact: false },
   { to: "/fit", label: "Marks", icon: ListChecks, exact: false },
   { to: "/compare", label: "Compare", icon: GitCompare, exact: false },
   { to: "/saved", label: "Saved", icon: Bookmark, exact: false },
@@ -196,20 +197,9 @@ export function Shell({ children }: { children: React.ReactNode }) {
                 <button type="button" onClick={() => goHome("find")} className="tap h-11 text-left text-sm font-semibold text-cream">
                   Find one course
                 </button>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setOpen(false);
-                    void navigate({
-                      to: "/",
-                      hash: "find",
-                      search: (prev) => ({ ...(prev as Record<string, unknown>), list: "1" }),
-                    });
-                  }}
-                  className="tap h-11 text-left text-sm font-semibold text-cream"
-                >
-                  Every course in this stream
-                </button>
+                <Link to="/courses" onClick={() => setOpen(false)} className="tap flex h-11 items-center text-sm font-semibold text-cream">
+                  All courses
+                </Link>
               </div>
             </div>
             <div className="mt-auto flex gap-2 border-t border-line pt-3">
@@ -225,7 +215,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
       ) : null}
       <main className="mx-auto w-full max-w-3xl px-4 pb-24">{children}</main>
       <nav className="fixed inset-x-0 bottom-0 z-20 border-t border-line bg-surface/95 backdrop-blur-md">
-        <ul className="mx-auto grid max-w-3xl grid-cols-4">
+        <ul className="mx-auto grid max-w-3xl grid-cols-5">
           {tabs.map((tab) => {
             const active = tab.exact ? pathname === tab.to : pathname.startsWith(tab.to);
             const Icon = tab.icon;
@@ -259,6 +249,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
 }
 
 function headingFor(pathname: string): string {
+  if (pathname.startsWith("/courses")) return "All courses";
   if (pathname.startsWith("/fit")) return "My marks";
   if (pathname.startsWith("/compare")) return "Compare";
   if (pathname.startsWith("/saved")) return "Saved";

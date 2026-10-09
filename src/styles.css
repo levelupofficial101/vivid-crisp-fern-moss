@@ -225,20 +225,3 @@ details[open] > summary::after {
   opacity: 0.45;
 }
 
-.wheel-face {
-  background: conic-gradient(
-    var(--accent) 0deg 45deg,
-    var(--blue) 45deg 90deg,
-    var(--accent) 90deg 135deg,
-    var(--blue) 135deg 180deg,
-    var(--accent) 180deg 225deg,
-    var(--blue) 225deg 270deg,
-    var(--accent) 270deg 315deg,
-    var(--blue) 315deg 360deg
-  );
-}
-
-.wheel-spin {
-  transition: transform 2.8s cubic-bezier(0.15, 0.7, 0.1, 1);
-}
-

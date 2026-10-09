@@ -18,7 +18,7 @@ function SavedPage() {
       {rows.length === 0 ? (
         <p className="mt-3 text-sm leading-normal text-muted">
           Nothing saved yet. Open a course and tap Save.{" "}
-          <Link to="/" className="text-brass">
+          <Link to="/courses" className="text-brass">
             See all courses
           </Link>
         </p>
