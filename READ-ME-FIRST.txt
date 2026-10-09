@@ -1,0 +1,47 @@
+LEVEL UP Careers — your own Vercel link
+
+The Publish button inside Grok always makes a grok.com address.
+This folder is for your own Vercel account, so the site lives at a
+link you own (something like level-up-careers.vercel.app).
+
+Do not delete any folder before you upload. The hidden .grok folder
+must stay. It keeps the site open, with no login wall.
+
+What you need
+- A free account on vercel.com (sign up with GitHub is easiest)
+- A free account on github.com
+
+Steps
+1. Unzip this download on your computer.
+2. On GitHub, create a new repository.
+   Name it level-up-careers.
+   Leave it empty: no README, no license, no gitignore.
+3. Open that empty repository and upload this whole folder.
+   On GitHub: Add file → Upload files, then drag the unzipped
+   folder in. Every folder must go up, including .grok.
+   If GitHub hides folders that start with a dot, use the
+   short command block at the bottom instead. That is the
+   reliable way.
+4. On vercel.com choose Add New → Project, then import
+   level-up-careers.
+5. Do not change the build settings. Do not add a database.
+   Do not add any environment variables.
+   Node should be 22. The build command is already npm run build.
+6. Click Deploy. When it finishes, the link on the screen is yours.
+
+If a login page appears, the upload missed the .grok folder.
+Upload again with that folder included, and redeploy.
+
+Only if GitHub will not take the folder, open Terminal in the
+unzipped folder and paste this, then import the repo on Vercel
+the same way as step 4:
+
+  git init
+  git add -A
+  git commit -m "LEVEL UP Careers"
+  git branch -M main
+  git remote add origin https://github.com/YOUR-NAME/level-up-careers.git
+  git push -u origin main
+
+Replace YOUR-NAME with your GitHub username. GitHub will ask you
+to sign in once.

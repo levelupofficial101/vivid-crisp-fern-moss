@@ -1,0 +1,244 @@
+@import "tailwindcss";
+
+/* Light looks like a bright app. Dark is black, like Instagram at night. */
+:root {
+  color-scheme: light;
+  --paper: #fafafa;
+  --card: #ffffff;
+  --ink: #262626;
+  --soft: #8e8e8e;
+  --accent: #ff4f00;
+  --ember: #c2410c;
+  --on-accent: #1a0700;
+  --blue: #0095f6;
+  --blue-soft: #e8f4ff;
+  --hairline: #dbdbdb;
+  --chip: #efefef;
+  --solid: #ffffff;
+  --shadow: 0 1px 2px rgb(0 0 0 / 4%);
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --paper: #000000;
+  --card: #121212;
+  --ink: #f5f5f5;
+  --soft: #a8a8a8;
+  --accent: #ff7a3d;
+  --ember: #ff8a4a;
+  --on-accent: #1a0700;
+  --blue: #4cb5ff;
+  --blue-soft: #102433;
+  --hairline: #262626;
+  --chip: #1c1c1c;
+  --solid: #f5f5f5;
+  --shadow: none;
+}
+
+@theme {
+  --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Outfit", ui-sans-serif, system-ui, sans-serif;
+
+  --color-bg: var(--paper);
+  --color-surface: var(--card);
+  --color-cream: var(--ink);
+  --color-muted: var(--soft);
+  --color-brass: var(--ember);
+  --color-hot: var(--accent);
+  --color-ink: var(--on-accent);
+  --color-blue: var(--blue);
+  --color-sky: var(--blue-soft);
+  --color-line: var(--hairline);
+  --color-raise: var(--chip);
+  --color-solid: var(--solid);
+}
+
+@layer base {
+  html {
+    background: var(--paper);
+    color: var(--ink);
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background: var(--paper);
+    color: var(--ink);
+    min-height: 100dvh;
+    text-rendering: optimizeLegibility;
+  }
+
+  .font-display {
+    font-weight: 700;
+    letter-spacing: -0.03em;
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  button:focus-visible,
+  a:focus-visible,
+  input:focus-visible,
+  select:focus-visible {
+    outline: 2px solid var(--blue);
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background: var(--accent);
+    color: var(--on-accent);
+  }
+}
+
+.panel {
+  background: var(--card);
+  border: 1px solid var(--hairline);
+  border-radius: 1rem;
+  box-shadow: var(--shadow);
+}
+
+.story-ring {
+  background: linear-gradient(135deg, var(--accent), var(--blue));
+  padding: 2px;
+  border-radius: 999px;
+}
+
+.scroll-none {
+  scrollbar-width: none;
+}
+
+.scroll-none::-webkit-scrollbar {
+  display: none;
+}
+
+details > summary {
+  list-style: none;
+  cursor: pointer;
+}
+
+details > summary::-webkit-details-marker {
+  display: none;
+}
+
+details > summary::after {
+  content: "+";
+  margin-left: auto;
+  color: var(--soft);
+  font-family: var(--font-sans);
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+details[open] > summary::after {
+  content: "–";
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.rise-in {
+  animation: rise 460ms cubic-bezier(0.2, 0, 0, 1) both;
+}
+
+.tap {
+  transition:
+    transform 150ms ease-out,
+    background-color 180ms ease,
+    color 180ms ease,
+    border-color 180ms ease;
+}
+
+.tap:active {
+  transform: scale(0.96);
+}
+
+.lift {
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    background-color 180ms ease;
+}
+
+.lift:active {
+  transform: scale(0.98);
+}
+
+@media (hover: hover) {
+  .lift:hover {
+    border-color: var(--accent);
+  }
+}
+
+#doors,
+#ai,
+#find,
+#fit {
+  scroll-margin-top: 12rem;
+}
+
+.vault {
+  background: color-mix(in srgb, var(--accent) 8%, var(--card));
+  border: 1px dashed var(--accent);
+  border-radius: 1rem;
+}
+
+.ai-world {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--blue) 55%, var(--hairline));
+  border-radius: 1.25rem;
+  background: color-mix(in srgb, var(--blue) 10%, var(--card));
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--blue) 25%, transparent);
+}
+
+.ai-world::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 11px,
+    color-mix(in srgb, var(--blue) 10%, transparent) 12px
+  );
+  opacity: 0.45;
+}
+
+.wheel-face {
+  background: conic-gradient(
+    var(--accent) 0deg 45deg,
+    var(--blue) 45deg 90deg,
+    var(--accent) 90deg 135deg,
+    var(--blue) 135deg 180deg,
+    var(--accent) 180deg 225deg,
+    var(--blue) 225deg 270deg,
+    var(--accent) 270deg 315deg,
+    var(--blue) 315deg 360deg
+  );
+}
+
+.wheel-spin {
+  transition: transform 2.8s cubic-bezier(0.15, 0.7, 0.1, 1);
+}
+
